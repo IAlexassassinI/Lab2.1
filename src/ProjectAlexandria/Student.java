@@ -1,7 +1,5 @@
 package ProjectAlexandria;
 
-import java.util.Objects;
-
 public class Student extends Human {
 
     private int course;
@@ -33,6 +31,15 @@ public class Student extends Human {
 
     public void setGroup(int group) {
         this.group = group;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Student student = (Student) o;
+        return course == student.course && group == student.group;
     }
 
     @Override
