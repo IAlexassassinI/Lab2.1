@@ -3,16 +3,43 @@ package ProjectAlexandria;
 public class University {
 
     private String name;
+    private final String file;
     private Faculty[] faculties;
     private Cathedra[] cathedras;
     private Student[] students;
     private Teacher[] teachers;
 
-    public University() {
+    public University(String name, String file) {
+        this.name = name;
+        this.file = file;
         this.faculties = new Faculty[0];
         this.cathedras = new Cathedra[0];
         this.students = new Student[0];
         this.teachers = new Teacher[0];
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public Faculty[] getFaculties() {
+        return faculties;
+    }
+
+    public Cathedra[] getCathedras() {
+        return cathedras;
+    }
+
+    public Student[] getStudents() {
+        return students;
+    }
+
+    public Teacher[] getTeachers() {
+        return teachers;
     }
 
     public void addFaculty(Faculty faculty) {
@@ -136,8 +163,168 @@ public class University {
         return res;
     }
 
+    public void deleteFaculty(Faculty faculty) {
+        Object[] objects = deleteAllElementsFromArray(this.faculties, faculty);
+        this.faculties = new Faculty[objects.length];
+        for(int i = 0; i < objects.length; i++) {
+            this.faculties[i] = (Faculty) objects[i];
+        }
+    }
+
+    public void deleteCathedra(Cathedra cathedra) {
+        Object[] objects = deleteAllElementsFromArray(this.cathedras, cathedra);
+        this.cathedras = new Cathedra[objects.length];
+        for(int i = 0; i < objects.length; i++) {
+            this.cathedras[i] = (Cathedra) objects[i];
+        }
+    }
+
+    public void deleteTeacher(Teacher teacher) {
+        Object[] objects = deleteAllElementsFromArray(this.teachers, teacher);
+        this.teachers = new Teacher[objects.length];
+        for(int i = 0; i < objects.length; i++) {
+            this.teachers[i] = (Teacher) objects[i];
+        }
+    }
+
+    public void deleteStudent(Student student) {
+        Object[] objects = deleteAllElementsFromArray(this.students, student);
+        this.students = new Student[objects.length];
+        for(int i = 0; i < objects.length; i++) {
+            this.students[i] = (Student) objects[i];
+        }
+    }
+
+    public void editFaculty(Faculty faculty, Faculty newFaculty) {
+        for(Faculty f : this.faculties) {
+            if(f.equals(faculty))f.copy(newFaculty);
+        }
+    }
+
+    public void editCathedra(Cathedra cathedra, Cathedra newCathedra) {
+        for(Cathedra c : this.cathedras) {
+            if(c.equals(cathedra))c.copy(newCathedra);
+        }
+    }
+
+    public void editTeacher(Teacher teacher, Teacher newTeacher) {
+        for(Teacher t : this.teachers) {
+            if(t.equals(teacher))t.copy(newTeacher);
+        }
+    }
+
+    public void editStudent(Student student, Student newStudent) {
+        for(Student s : this.students) {
+            if(s.equals(student))s.copy(newStudent);
+        }
+    }
+
+    public Student[] getAllStudentsByCourses() {
+        Student[] res = new Student[this.students.length];
+        int id = 0;
+        for(int i = 1; i <= 6; i++) {
+            for(Student student : this.students){
+                if(student.getCourse() == i)res[id++] = student;
+            }
+        }
+        return res;
+    }
+
+    public Student[] getAllStudentsFromFaculty(Faculty faculty) {
+        Student[] res = null;
+        for (Student student : this.students) {
+            if(student.getFaculty().equals(faculty)) res = addStudentToArray(res, student);
+        }
+        return res;
+    }
+
+    public Teacher[] getAllTeachersFromFaculty(Faculty faculty) {
+        Teacher[] res = null;
+        for (Teacher teacher : this.teachers) {
+            if(teacher.getFaculty().equals(faculty)) res = addTeacherToArray(res, teacher);
+        }
+        return res;
+    }
+
+    public Student[] getAllStudentsFromCathedraByCourses(Cathedra cathedra) {
+        return (Student[]) getAllHumansFromCathedra(getAllStudentsByCourses(), cathedra);
+    }
+
+    public Student[] getAllStudentsFromCathedra(Cathedra cathedra) {
+        return (Student[]) getAllHumansFromCathedra(this.students, cathedra);
+    }
+
+    public Teacher[] getAllTeachersFromCathedra(Cathedra cathedra) {
+        return (Teacher[]) getAllHumansFromCathedra(this.teachers, cathedra);
+    }
+    public Student[] getAllStudentsFromCathedraFromCourse(Cathedra cathedra, int course) {
+        Student[] res = null;
+        Student[] students = (Student[]) getAllHumansFromCathedra(this.students, cathedra);
+        for(Student student : students) {
+            if(student.getCourse() == course)res = addStudentToArray(res, student);
+        }
+        return res;
+    }
+
+    /*private saveAll() {
+        DataFile dataFile = new DataFile(file, this);
+        boolean isError;
+        do {
+            isError = false;
+            try {
+                dataFile.SaveAll();
+            } catch (Exception e) {
+                isError = true;
+            }
+        } while(isError);
+    }*/
+
+    private Human[] getAllHumansFromCathedra(Human[] humans, Cathedra cathedra) {
+        Human[] res = null;
+        for(Human human : humans) {
+            if(human.getCathedra().equals(cathedra))res = addHumanToArray(res, human);
+        }
+        return res;
+    }
+
+    /*public static void main(String[] args) {
+
+    }*/
+
+    private Object[] deleteAllElementsFromArray(Object[] objects, Object object) {
+        for(int i = 0; i < objects.length; i++) {
+            if(objects[i].equals(object)){
+                objects = deleteElementFromArray(objects, i);
+                i--;
+            }
+        }
+        return objects;
+    }
+
+    private Object[] deleteElementFromArray(Object[] objects, int id) {
+        Object[] temp = new Object[objects.length-1];
+        for(int i = 0; i < id; i++){
+            temp[i] = objects[i];
+        }
+        for(int i = id; i < temp.length; i++) {
+            temp[i] = objects[i+1];
+        }
+        return temp;
+    }
+
+    private Human[] addHumanToArray(Human[] humans, Human human) {
+        if(humans == null)return new Human[]{human};
+        Human[] res = new Human[humans.length+1];
+        for(int i = 0; i < humans.length; i++) {
+            res[i] = humans[i];
+        }
+        res[humans.length] = human;
+        return res;
+    }
+
     private Student[] addStudentToArray(Student[] students, Student student) {
-        Student[] res = new Student[students == null ? 1 : students.length];
+        if(students == null)return new Student[]{student};
+        Student[] res = new Student[students.length+1];
         for(int i = 0; i < students.length; i++) {
             res[i] = students[i];
         }
@@ -146,7 +333,8 @@ public class University {
     }
 
     private Teacher[] addTeacherToArray(Teacher[] teachers, Teacher teacher) {
-        Teacher[] res = new Teacher[teachers == null ? 1 : teachers.length];
+        if(teachers == null)return new Teacher[]{teacher};
+        Teacher[] res = new Teacher[teachers.length+1];
         for(int i = 0; i < teachers.length; i++) {
             res[i] = teachers[i];
         }

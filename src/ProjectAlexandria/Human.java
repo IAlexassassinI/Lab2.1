@@ -50,6 +50,14 @@ public class Human {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return isTeacher == human.isTeacher && Arrays.equals(name, human.name) && Objects.equals(cathedra, human.cathedra);
+    }
+
+    @Override
     public String toString() {
         return "Human{" +
                 "isTeacher=" + isTeacher +
