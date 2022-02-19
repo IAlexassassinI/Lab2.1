@@ -43,10 +43,7 @@ public class Cathedra {
 
     @Override
     public String toString() {
-        return "Cathedra{" +
-                "name='" + name + '\'' +
-                ", faculty=" + faculty +
-                '}';
+        return "кафедра: " + this.name;
     }
 }
 

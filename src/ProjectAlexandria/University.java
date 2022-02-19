@@ -82,6 +82,7 @@ public class University {
         }
 
         temp[position] = student;
+        this.students = temp;
     }
 
     public Faculty getFaculty(String name) {
@@ -127,6 +128,7 @@ public class University {
         }
 
         temp[position] = teacher;
+        this.teachers = temp;
     }
 
     public Student[] getAllStudents(String[] name) {
@@ -165,6 +167,10 @@ public class University {
 
     public void deleteFaculty(Faculty faculty) {
         Object[] objects = deleteAllElementsFromArray(this.faculties, faculty);
+        if(objects == null) {
+            this.faculties = new Faculty[0];
+            return;
+        }
         this.faculties = new Faculty[objects.length];
         for(int i = 0; i < objects.length; i++) {
             this.faculties[i] = (Faculty) objects[i];
@@ -173,6 +179,10 @@ public class University {
 
     public void deleteCathedra(Cathedra cathedra) {
         Object[] objects = deleteAllElementsFromArray(this.cathedras, cathedra);
+        if(objects == null) {
+            this.cathedras = new Cathedra[0];
+            return;
+        }
         this.cathedras = new Cathedra[objects.length];
         for(int i = 0; i < objects.length; i++) {
             this.cathedras[i] = (Cathedra) objects[i];
@@ -181,6 +191,10 @@ public class University {
 
     public void deleteTeacher(Teacher teacher) {
         Object[] objects = deleteAllElementsFromArray(this.teachers, teacher);
+        if(objects == null) {
+            this.teachers = new Teacher[0];
+            return;
+        }
         this.teachers = new Teacher[objects.length];
         for(int i = 0; i < objects.length; i++) {
             this.teachers[i] = (Teacher) objects[i];
@@ -189,6 +203,10 @@ public class University {
 
     public void deleteStudent(Student student) {
         Object[] objects = deleteAllElementsFromArray(this.students, student);
+        if(objects == null) {
+            this.students = new Student[0];
+            return;
+        }
         this.students = new Student[objects.length];
         for(int i = 0; i < objects.length; i++) {
             this.students[i] = (Student) objects[i];
@@ -247,19 +265,42 @@ public class University {
     }
 
     public Student[] getAllStudentsFromCathedraByCourses(Cathedra cathedra) {
-        return (Student[]) getAllHumansFromCathedra(getAllStudentsByCourses(), cathedra);
+        Human[] humans = getAllHumansFromCathedra(getAllStudentsByCourses(), cathedra);
+        if(humans == null)return null;
+        Student[] students = new Student[humans.length];
+        for(int i = 0; i < humans.length; i++) {
+            students[i] = (Student) humans[i];
+        }
+        return students;
     }
 
     public Student[] getAllStudentsFromCathedra(Cathedra cathedra) {
-        return (Student[]) getAllHumansFromCathedra(this.students, cathedra);
+        Human[] humans = getAllHumansFromCathedra(this.students, cathedra);
+        if(humans == null)return null;
+        Student[] students = new Student[humans.length];
+        for(int i = 0; i < humans.length; i++) {
+            students[i] = (Student) humans[i];
+        }
+        return students;
     }
 
     public Teacher[] getAllTeachersFromCathedra(Cathedra cathedra) {
-        return (Teacher[]) getAllHumansFromCathedra(this.teachers, cathedra);
+        Human[] humans =  getAllHumansFromCathedra(this.teachers, cathedra);
+        if(humans == null)return null;
+        Teacher[] teachers = new Teacher[humans.length];
+        for(int i = 0; i < humans.length; i++) {
+            teachers[i] = (Teacher) humans[i];
+        }
+        return teachers;
     }
     public Student[] getAllStudentsFromCathedraFromCourse(Cathedra cathedra, int course) {
         Student[] res = null;
-        Student[] students = (Student[]) getAllHumansFromCathedra(this.students, cathedra);
+        Human[] humans = (Student[]) getAllHumansFromCathedra(this.students, cathedra);
+        if(humans == null)return null;
+        Student[] students = new Student[humans.length];
+        for(int i = 0; i < humans.length; i++) {
+            students[i] = (Student) humans[i];
+        }
         for(Student student : students) {
             if(student.getCourse() == course)res = addStudentToArray(res, student);
         }

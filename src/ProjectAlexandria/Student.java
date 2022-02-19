@@ -44,9 +44,6 @@ public class Student extends Human {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "course=" + course +
-                ", group=" + group +
-                '}';
+        return "студент: " + super.toString() + ", курс: " + this.course + ", група: " + this.group;
     }
 }

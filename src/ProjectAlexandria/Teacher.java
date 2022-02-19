@@ -6,4 +6,8 @@ public class Teacher extends Human {
         super(true, name, cathedra);
     }
 
+    @Override
+    public String toString() {
+        return "вчитель: " + super.toString();
+    }
 }
