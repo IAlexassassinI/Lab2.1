@@ -1,5 +1,6 @@
 package UniversityUtilits;
 
+
 public class Menu {
 
     //TODO add go to main menu
@@ -31,7 +32,7 @@ public class Menu {
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -64,14 +65,14 @@ public class Menu {
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
     //TODO VVV Actions of edit VVV
     private static void ChooseActionMenuForFaculty(University Univ){
         int Input = -1;
-        Faculty TMPFacult = null;
+        Faculty TMPFacult;
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Додати факультет");
@@ -108,13 +109,13 @@ public class Menu {
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
     private static void ChooseActionMenuForCathedra(University Univ){
         int Input = -1;
-        Cathedra TMPCathedra = null;
+        Cathedra TMPCathedra;
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Додати кафедру");
@@ -149,13 +150,13 @@ public class Menu {
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
     private static void ChooseActionMenuForStudent(University Univ){
         int Input = -1;
-        Student TMPStudent = null;
+        Student TMPStudent;
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Додати студента");
@@ -190,13 +191,13 @@ public class Menu {
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
     private static void ChooseActionMenuForTeacher(University Univ){
         int Input = -1;
-        Teacher TMPTeacher = null;
+        Teacher TMPTeacher;
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Додати викладача");
@@ -231,7 +232,7 @@ public class Menu {
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
     //TODO ^^^ Actions of edit ^^^
@@ -248,52 +249,118 @@ public class Menu {
 
             switch (Input) {
                 case 1:
-
+                    FindByWhatStudent(Univ);
                     break;
                 case 2:
-
+                    FindByWhatTeacher(Univ);
                     break;
                 default:
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
+        }
+    }
+
+    private static void PrintAllHumanFromList(Human List[]){
+        if(List == null){
+            System.out.println("Не вдалося нікого знайти");
+        }
+        else{
+            int Length = List.length;
+            for(int i = 0; i < Length; i++){
+                System.out.println(List[i]);
+            }
         }
     }
 
     private static void FindByWhatStudent(University Univ){
         int Input = -1;
+        String TMPName[];
+        int TMPCourse;
+        int TMPGroup;
+        Cathedra TMPCathedra;
+        Student ForAnswer[];
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Знайти за ПІБ");
             System.out.println("2] Знайти за курсом");
-            System.out.println("3] Знайти за групою");
+            System.out.println("3] Знайти за групою та кафедрою");
             System.out.println("Що ви бажаєте зробити");
             Input = DataInput.getInt(">");
 
             switch (Input) {
                 case 1:
-
+                    TMPName = AskNameOfStudent();
+                    if(TMPName != null){
+                        ForAnswer = Univ.getAllStudents(TMPName);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 case 2:
-
+                    TMPCourse = AskCourseOfStudent();
+                    if(TMPCourse != 0){
+                        ForAnswer = Univ.getAllStudents(TMPCourse);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 case 3:
-
+                    TMPGroup = AskGroupOfStudent();
+                    if(TMPGroup != 0){
+                        TMPCathedra = SearchCathedra(Univ);
+                        if(TMPCathedra != null){
+                            ForAnswer = Univ.getAllStudents(TMPCathedra, TMPGroup);
+                            PrintAllHumanFromList(ForAnswer);
+                        }
+                    }
                     break;
                 default:
                     break;
             }
 
-            System.out.println("");
+
+
+            System.out.println();
         }
     }
+
+    private static void FindByWhatTeacher(University Univ) {
+        int Input = -1;
+        String TMPName[];
+        Teacher ForAnswer[];
+        while (Input != 0) {
+            System.out.println("0] Повернутись до попереднього меню");
+            System.out.println("1] Знайти за ПІБ");
+            System.out.println("Що ви бажаєте зробити");
+            Input = DataInput.getInt(">");
+
+            switch (Input) {
+                case 1:
+                    TMPName = AskNameOfTeacher();
+                    if(TMPName != null){
+                        ForAnswer = Univ.getAllTeachers(TMPName);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            System.out.println();
+        }
+    }
+
+
 
     //TODO ^^^ Finder ^^^
     //TODO VVV Information VVV
 
     private static void StudentInfoMenu(University Univ){
         int Input = -1;
+        Student ForAnswer[];
+        Faculty TMPFacult;
+        Cathedra TMPCathedra;
+        int TMPCourse = 0;
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Вивести всіх студентів впорядкованих за курсами");
@@ -306,30 +373,53 @@ public class Menu {
 
             switch (Input) {
                 case 1:
-                    Univ.getAllStudentsByCourses();
+                    ForAnswer = Univ.getAllStudentsByCourses();
+                    PrintAllHumanFromList(ForAnswer);
                     break;
                 case 2:
-
+                    TMPFacult = SearchFaculty(Univ);
+                    if(TMPFacult != null){
+                        ForAnswer = Univ.getAllStudentsFromFaculty(TMPFacult);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 case 3:
-
+                    TMPCathedra = SearchCathedra(Univ);
+                    if(TMPCathedra != null){
+                        ForAnswer = Univ.getAllStudentsFromCathedraByCourses(TMPCathedra);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 case 4:
-
+                    TMPCathedra = SearchCathedra(Univ);
+                    if(TMPCathedra != null){
+                        ForAnswer = Univ.getAllStudentsFromCathedra(TMPCathedra);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 case 5:
-
+                    TMPCathedra = SearchCathedra(Univ);
+                    if(TMPCathedra != null){
+                        TMPCourse = AskCourseOfStudent();
+                        if(TMPCourse != 0){
+                            ForAnswer = Univ.getAllStudentsFromCathedraFromCourse(TMPCathedra, TMPCourse);
+                            PrintAllHumanFromList(ForAnswer);
+                        }
+                    }
                     break;
                 default:
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
     private static void TeacherInfoMenu(University Univ){
         int Input = -1;
+        Faculty TMPFacult;
+        Teacher ForAnswer[];
+        Cathedra TMPCathedra;
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Вивести всіх викладачів факультета впорядкованих за алфавітом");
@@ -339,16 +429,24 @@ public class Menu {
 
             switch (Input) {
                 case 1:
-
+                    TMPFacult = SearchFaculty(Univ);
+                    if(TMPFacult != null){
+                        ForAnswer = Univ.getAllTeachersFromFaculty(TMPFacult);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 case 2:
-
+                    TMPCathedra = SearchCathedra(Univ);
+                    if(TMPCathedra != null){
+                        ForAnswer = Univ.getAllTeachersFromCathedra(TMPCathedra);
+                        PrintAllHumanFromList(ForAnswer);
+                    }
                     break;
                 default:
                     break;
             }
 
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -415,14 +513,17 @@ public class Menu {
                 System.out.println("Такого факультету не існує, повторіть");
             }
         }
+        System.out.println();
         return SearchFacult;
     }
 
     private static void AskWhatParamInFacultyToEdit(Faculty Facult, University Univ){
         int Input = -1;
-        Faculty ForChange = null;
-        String NameForChange = null;
+        Faculty ForChange;
+        String NameForChange;
         while (Input != 0) {
+            PrintCurrentInformation(Facult);
+
             System.out.println("Виберіть параметр який бажаєте змінити");
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Змінити назву факултету");
@@ -441,7 +542,7 @@ public class Menu {
                 default:
                     break;
             }
-            System.out.println("");
+            System.out.println();
         }
     }
     //TODO ^^^ ^^^ ^^^
@@ -515,15 +616,18 @@ public class Menu {
                 System.out.println("Такого факультету не існує, повторіть");
             }
         }
+        System.out.println();
         return SearchCathedra;
     }
 
     private static void AskWhatParamInCathedraToEdit(Cathedra Cathed, University Univ){
         int Input = -1;
-        Cathedra ForChange = null;
-        String NameForChange = null;
-        Faculty FacultyForChange = null;
+        Cathedra ForChange;
+        String NameForChange;
+        Faculty FacultyForChange;
         while (Input != 0) {
+            PrintCurrentInformation(Cathed);
+
             System.out.println("Виберіть параметр який бажаєте змінити");
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Змінити назву кафедри");
@@ -551,7 +655,7 @@ public class Menu {
                 default:
                     break;
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -677,12 +781,14 @@ public class Menu {
 
     private static void AskWhatParamInStudentToEdit(Student Stud, University Univ){
         int Input = -1;
-        Student ForChange = null;
-        String NameForChange[] = null;
-        Cathedra CathedraForChange = null;
-        int CourseForChange = 0;
-        int GroupForChange = 0;
+        Student ForChange;
+        String NameForChange[];
+        Cathedra CathedraForChange;
+        int CourseForChange;
+        int GroupForChange;
         while (Input != 0) {
+            PrintCurrentInformation(Stud);
+
             System.out.println("Виберіть параметр який бажаєте змінити");
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Змінити ПІБ");
@@ -728,7 +834,7 @@ public class Menu {
                 default:
                     break;
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -810,12 +916,12 @@ public class Menu {
 
     private static void AskWhatParamInTeacherToEdit(Teacher Teach, University Univ){
         int Input = -1;
-        Teacher ForChange = null;
-        String NameForChange[] = null;
-        Cathedra CathedraForChange = null;
-        int CourseForChange = 0;
-        int GroupForChange = 0;
+        Teacher ForChange;
+        String NameForChange[];
+        Cathedra CathedraForChange;
         while (Input != 0) {
+            PrintCurrentInformation(Teach);
+
             System.out.println("Виберіть параметр який бажаєте змінити");
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Змінити ПІБ");
@@ -843,7 +949,28 @@ public class Menu {
                 default:
                     break;
             }
-            System.out.println("");
+            System.out.println();
+        }
+    }
+
+    private static void PrintCurrentInformation(Object ForPrint[]){
+        if(ForPrint != null){
+            System.out.println("Поточна інформація:");
+            System.out.println();
+            int Length = ForPrint.length;
+            for(int i = 0; i < Length; i++){
+                System.out.println(ForPrint[i]);
+            }
+            System.out.println();
+        }
+    }
+
+    private static void PrintCurrentInformation(Object ForPrint){
+        if(ForPrint != null){
+            System.out.println("Поточна інформація:");
+            System.out.println();
+            System.out.println(ForPrint);
+            System.out.println();
         }
     }
 
