@@ -1,29 +1,47 @@
-package ProjectAlexandria;
+package UniversityUtilits;
 
 public class University {
 
     private String name;
-    private final String file;
+    //private final String file;
     private Faculty[] faculties;
     private Cathedra[] cathedras;
     private Student[] students;
     private Teacher[] teachers;
+    private DataFile dataFile;
 
     public University(String name, String file) {
         this.name = name;
-        this.file = file;
+        //this.file = file;
         this.faculties = new Faculty[0];
         this.cathedras = new Cathedra[0];
         this.students = new Student[0];
         this.teachers = new Teacher[0];
+        this.dataFile = new DataFile(file, this);
+    }
+
+    void setName(String name) {
+        this.name = name;
+    }
+
+    void setFaculties(Faculty[] faculties) {
+        this.faculties = faculties;
+    }
+
+    void setCathedras(Cathedra[] cathedras) {
+        this.cathedras = cathedras;
+    }
+
+    void setStudents(Student[] students) {
+        this.students = students;
+    }
+
+    void setTeachers(Teacher[] teachers) {
+        this.teachers = teachers;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getFile() {
-        return file;
     }
 
     public Faculty[] getFaculties() {
@@ -266,8 +284,7 @@ public class University {
         return res;
     }
 
-    /*private saveAll() {
-        DataFile dataFile = new DataFile(file, this);
+    public void saveAll() {
         boolean isError;
         do {
             isError = false;
@@ -277,7 +294,7 @@ public class University {
                 isError = true;
             }
         } while(isError);
-    }*/
+    }
 
     private Human[] getAllHumansFromCathedra(Human[] humans, Cathedra cathedra) {
         Human[] res = null;
