@@ -1,4 +1,4 @@
-package ProjectAlexandria;
+package UniversityUtilits;
 
 public class Teacher extends Human {
 

@@ -1,4 +1,4 @@
-package ProjectAlexandria;
+package UniversityUtilits;
 
 import java.util.Objects;
 
