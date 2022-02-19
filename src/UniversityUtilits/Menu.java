@@ -249,10 +249,10 @@ public class Menu {
 
             switch (Input) {
                 case 1:
-                    FindByWhatStudent(Univ);
+                    FindByWhatTeacher(Univ);
                     break;
                 case 2:
-                    FindByWhatTeacher(Univ);
+                    FindByWhatStudent(Univ);
                     break;
                 default:
                     break;
