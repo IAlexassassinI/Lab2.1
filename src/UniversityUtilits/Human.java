@@ -59,10 +59,6 @@ public class Human {
 
     @Override
     public String toString() {
-        return "Human{" +
-                "isTeacher=" + isTeacher +
-                ", name=" + Arrays.toString(name) +
-                ", cathedra=" + cathedra +
-                '}';
+        return this.name[0] + " " + this.name[1] + " " + this.name[2] + ", факультет: " + this.cathedra.getFaculty().toString() + ", кафедра: " + this.cathedra.toString();
     }
 }
