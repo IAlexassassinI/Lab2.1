@@ -249,10 +249,10 @@ public class Menu {
 
             switch (Input) {
                 case 1:
-                    FindByWhatStudent(Univ);
+                    FindByWhatTeacher(Univ);
                     break;
                 case 2:
-                    FindByWhatTeacher(Univ);
+                    FindByWhatStudent(Univ);
                     break;
                 default:
                     break;
@@ -272,6 +272,7 @@ public class Menu {
                 System.out.println(List[i]);
             }
         }
+        System.out.println();
     }
 
     private static void FindByWhatStudent(University Univ){
@@ -317,8 +318,6 @@ public class Menu {
                 default:
                     break;
             }
-
-
 
             System.out.println();
         }
@@ -482,11 +481,20 @@ public class Menu {
     }
 
     private static String AskNameOfFaculty(){
-        System.out.println("Введіть назву факультету, 0 для відміни");
+        System.out.println("Введіть назву факультету, 0 або пуста стрічка для відміни");
         String Name = DataInput.getString(">");
-        if(Name.charAt(0) == '0'){
+        if(Name.length() <= 0){
             return null;
         }
+        try {
+            int Nuller = Integer.parseInt(Name);
+            if(Nuller == 0){
+                return null;
+            }
+        } catch (NumberFormatException e) {
+
+        }
+
         return Name;
     }
 
@@ -499,6 +507,7 @@ public class Menu {
             }
             System.out.print(Univ.getFaculties()[i]+"; ");
         }
+        System.out.println();
         Faculty SearchFacult;
         while(true){
             String NameOfFaculty = AskNameOfFaculty();
@@ -585,23 +594,31 @@ public class Menu {
     }
 
     private static String AskNameOfCathedra(){
-        System.out.println("Введіть назву кафедри, 0 для відміни");
+        System.out.println("Введіть назву кафедри, 0 або пуста стрічка для відміни");
         String Name = DataInput.getString(">");
-        if(Name.charAt(0) == '0'){
+        if(Name.length() <= 0){
             return null;
+        }
+        try {
+            int Nuller = Integer.parseInt(Name);
+            if(Nuller == 0){
+                return null;
+            }
+        } catch (NumberFormatException e) {
+
         }
         return Name;
     }
 
     private static Cathedra SearchCathedra(University Univ){
         System.out.println("Доступні кафедри:");
-
         for (int i = 0; i < Univ.getCathedras().length; i++){
             if((i % 3) == 0){
                 System.out.print("\n");
             }
             System.out.print(Univ.getCathedras()[i]+"; ");
         }
+        System.out.println();
         Cathedra SearchCathedra;
         while(true){
             String NameOfCathedra = AskNameOfCathedra();
@@ -613,7 +630,7 @@ public class Menu {
                 break;
             }
             else{
-                System.out.println("Такого факультету не існує, повторіть");
+                System.out.println("Такої кафедри не існує, повторіть");
             }
         }
         System.out.println();
@@ -719,7 +736,7 @@ public class Menu {
                 return Res;
             }
             else {
-                System.out.println("Не корректний курс, повторіть");
+                System.out.println("Не корректна група, повторіть");
             }
         }
     }
@@ -742,22 +759,50 @@ public class Menu {
         return NameOfStudent;
     }
 
-    private static String[] AskNameOfStudent(){
-        System.out.println("Введіть ПІБ студента, 0 для відміни");
+    private static String[] AskNameOfHuman(){
         String Name[] = new String[3];
         Name[0] = DataInput.getString("Прізвище:");
-        if(Name[0].charAt(0) == '0'){
+        if(Name[0].length() <= 0){
             return null;
+        }
+        try {
+            int Nuller = Integer.parseInt(Name[0]);
+            if(Nuller == 0){
+                return null;
+            }
+        } catch (NumberFormatException e) {
+
         }
         Name[1] = DataInput.getString("Ім'я:");
-        if(Name[1].charAt(0) == '0'){
+        if(Name[1].length() <= 0){
             return null;
+        }
+        try {
+            int Nuller = Integer.parseInt(Name[1]);
+            if(Nuller == 0){
+                return null;
+            }
+        } catch (NumberFormatException e) {
+
         }
         Name[2] = DataInput.getString("Побатькові:");
-        if(Name[2].charAt(0) == '0'){
+        if(Name[2].length() <= 0){
             return null;
         }
+        try {
+            int Nuller = Integer.parseInt(Name[2]);
+            if(Nuller == 0){
+                return null;
+            }
+        } catch (NumberFormatException e) {
+
+        }
         return Name;
+    }
+
+    private static String[] AskNameOfStudent(){
+        System.out.println("Введіть ПІБ студента, 0 або пуста стрічка для відміни");
+        return AskNameOfHuman();
     }
 
     private static Student SearchStudent(University Univ){
@@ -878,21 +923,8 @@ public class Menu {
     }
 
     private static String[] AskNameOfTeacher(){
-        System.out.println("Введіть ПІБ викладача, 0 для відміни");
-        String Name[] = new String[3];
-        Name[0] = DataInput.getString("Прізвище:");
-        if(Name[0].charAt(0) == '0'){
-            return null;
-        }
-        Name[1] = DataInput.getString("Ім'я:");
-        if(Name[1].charAt(0) == '0'){
-            return null;
-        }
-        Name[2] = DataInput.getString("Побатькові:");
-        if(Name[2].charAt(0) == '0'){
-            return null;
-        }
-        return Name;
+        System.out.println("Введіть ПІБ викладача, 0 або пуста стрічка для відміни");
+        return AskNameOfHuman();
     }
 
     private static Teacher SearchTeacher(University Univ){
@@ -953,6 +985,7 @@ public class Menu {
         }
     }
 
+    /*
     private static void PrintCurrentInformation(Object ForPrint[]){
         if(ForPrint != null){
             System.out.println("Поточна інформація:");
@@ -973,6 +1006,51 @@ public class Menu {
             System.out.println();
         }
     }
+     */
 
+    private static void PrintCurrentInformation(Faculty ForPrint){
+        if(ForPrint != null){
+            System.out.println("Поточна інформація:");
+            System.out.println();
+            System.out.println("Назва: \""+ForPrint.getName()+"\"");
+            System.out.println();
+        }
+    }
+
+    private static void PrintCurrentInformation(Cathedra ForPrint){
+        if(ForPrint != null){
+            System.out.println("Поточна інформація:");
+            System.out.println();
+            System.out.println("Назва: \""+ForPrint.getName()+"\"");
+            System.out.println("Приписаний факультет: \""+ForPrint.getFaculty().getName()+"\"");
+            System.out.println();
+        }
+    }
+
+    private static void PrintCurrentInformationH(Human ForPrint){
+        if(ForPrint != null){
+            System.out.println("Поточна інформація:");
+            System.out.println();
+            System.out.println("ПІБ: \""+ForPrint.getName()[0]+"_"+ForPrint.getName()[1]+"_"+ForPrint.getName()[2]+"\"");
+            System.out.println("Приписана кафедра: \""+ForPrint.getCathedra().getName()+"\"");
+            System.out.println("Приписаний факультет: \""+ForPrint.getCathedra().getFaculty().getName()+"\"");
+        }
+    }
+
+    private static void PrintCurrentInformation(Student ForPrint){
+        if(ForPrint != null){
+            PrintCurrentInformationH(ForPrint);
+            System.out.println("Курс: "+ForPrint.getCourse());
+            System.out.println("Група: "+ForPrint.getGroup());
+            System.out.println();
+        }
+    }
+
+    private static void PrintCurrentInformation(Teacher ForPrint){
+        if(ForPrint != null){
+            PrintCurrentInformationH(ForPrint);
+            System.out.println();
+        }
+    }
 
 }
