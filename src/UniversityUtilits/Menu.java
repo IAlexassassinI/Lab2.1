@@ -157,6 +157,7 @@ public class Menu {
     private static void ChooseActionMenuForStudent(University Univ){
         int Input = -1;
         Student TMPStudent;
+        Student TMPStudentMass[];
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Додати студента");
@@ -174,14 +175,16 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    TMPStudent = SearchStudent(Univ);
+                    TMPStudentMass = SearchStudent(Univ);
+                    TMPStudent = (Student) SpecifyObject(TMPStudentMass);
                     if(TMPStudent != null){
                         Univ.deleteStudent(TMPStudent);
                         Univ.saveAll();
                     }
                     break;
                 case 3:
-                    TMPStudent = SearchStudent(Univ);
+                    TMPStudentMass = SearchStudent(Univ);
+                    TMPStudent = (Student) SpecifyObject(TMPStudentMass);
                     if(TMPStudent != null){
                         AskWhatParamInStudentToEdit(TMPStudent, Univ);
                         //Univ.saveAll();
@@ -198,6 +201,7 @@ public class Menu {
     private static void ChooseActionMenuForTeacher(University Univ){
         int Input = -1;
         Teacher TMPTeacher;
+        Teacher TMPTeacherMass[];
         while (Input != 0) {
             System.out.println("0] Повернутись до попереднього меню");
             System.out.println("1] Додати викладача");
@@ -215,14 +219,16 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    TMPTeacher = SearchTeacher(Univ);
+                    TMPTeacherMass = SearchTeacher(Univ);
+                    TMPTeacher = (Teacher) SpecifyObject(TMPTeacherMass);
                     if(TMPTeacher != null){
                         Univ.deleteTeacher(TMPTeacher);
                         Univ.saveAll();
                     }
                     break;
                 case 3:
-                    TMPTeacher = SearchTeacher(Univ);
+                    TMPTeacherMass = SearchTeacher(Univ);
+                    TMPTeacher = (Teacher) SpecifyObject(TMPTeacherMass);
                     if(TMPTeacher != null){
                         AskWhatParamInTeacherToEdit(TMPTeacher, Univ);
                         //Univ.saveAll();
@@ -275,45 +281,64 @@ public class Menu {
         System.out.println();
     }
 
+    //TODO CHANGING WIP
     private static void FindByWhatStudent(University Univ){
         int Input = -1;
-        String TMPName[];
-        int TMPCourse;
-        int TMPGroup;
-        Cathedra TMPCathedra;
-        Student ForAnswer[];
+        String TMPName[] = null;
+        int TMPCourse = 0;
+        int TMPGroup = 0;
+        Student ForAnswer[] = null;
         while (Input != 0) {
+            System.out.println("Поточні параметри пошуку:");
+
+            System.out.print("ПІБ: ");
+            if(TMPName == null){
+                System.out.println("параметр не задано");
+            }
+            else{
+                System.out.println("\""+TMPName[0]+"_"+TMPName[1]+"_"+TMPName[2]+"\"");
+            }
+
+            System.out.print("Курс :");
+            if(TMPCourse == 0){
+                System.out.println("параметр не задано");
+            }
+            else{
+                System.out.println(TMPCourse);
+            }
+
+            System.out.print("Група: ");
+            if(TMPGroup == 0){
+                System.out.println("параметр не задано");
+            }
+            else{
+                System.out.println(TMPGroup);
+            }
+
+            System.out.println();
+
             System.out.println("0] Повернутись до попереднього меню");
-            System.out.println("1] Знайти за ПІБ");
-            System.out.println("2] Знайти за курсом");
-            System.out.println("3] Знайти за групою та кафедрою");
+            System.out.println("1] Запустити пошук");
+            System.out.println("2] Встановити параметр для пошуку за ПІБ");
+            System.out.println("3] Встановити параметр для пошуку за курсом");
+            System.out.println("4] Встановити параметр для пошуку за групою");
+            System.out.println("Попередження: за умови відміни встановлення параметра пошуку, він буде анульований");
             System.out.println("Що ви бажаєте зробити");
             Input = DataInput.getInt(">");
 
             switch (Input) {
                 case 1:
-                    TMPName = AskNameOfStudent();
-                    if(TMPName != null){
-                        ForAnswer = Univ.getAllStudents(TMPName);
-                        PrintAllHumanFromList(ForAnswer);
-                    }
+                    //ForAnswer = findByParam(TMPName, TMPCourse, TMPGroup);
+                    PrintAllHumanFromList(ForAnswer);
                     break;
                 case 2:
-                    TMPCourse = AskCourseOfStudent();
-                    if(TMPCourse != 0){
-                        ForAnswer = Univ.getAllStudents(TMPCourse);
-                        PrintAllHumanFromList(ForAnswer);
-                    }
+                    TMPName = AskNameOfStudent();
                     break;
                 case 3:
+                    TMPCourse = AskCourseOfStudent();
+                    break;
+                case 4:
                     TMPGroup = AskGroupOfStudent();
-                    if(TMPGroup != 0){
-                        TMPCathedra = SearchCathedra(Univ);
-                        if(TMPCathedra != null){
-                            ForAnswer = Univ.getAllStudents(TMPCathedra, TMPGroup);
-                            PrintAllHumanFromList(ForAnswer);
-                        }
-                    }
                     break;
                 default:
                     break;
@@ -743,19 +768,12 @@ public class Menu {
 
     private static String[] AskNamePartOfStudent(University Univ){
         String NameOfStudent[];
-        while(true){
-            NameOfStudent = AskNameOfStudent();
-            if(NameOfStudent == null){
-                return null;
-            }
-            Student SearchStudents[] = Univ.getAllStudents(NameOfStudent);
-            if(SearchStudents == null){
-                break;
-            }
-            else{
-                System.out.println("Студент з таким ПІБ вже існує, повторіть");
-            }
+
+        NameOfStudent = AskNameOfStudent();
+        if(NameOfStudent == null){
+            return null;
         }
+
         return NameOfStudent;
     }
 
@@ -805,7 +823,10 @@ public class Menu {
         return AskNameOfHuman();
     }
 
-    private static Student SearchStudent(University Univ){
+    private static Student[] SearchStudent(University Univ){
+        //TODO
+        //TODO Clones allowed
+        //TODO
 
         Student SearchStudent[];
         while(true){
@@ -821,7 +842,7 @@ public class Menu {
                 System.out.println("Такого студента не існує, повторіть");
             }
         }
-        return SearchStudent[0];
+        return SearchStudent;
     }
 
     private static void AskWhatParamInStudentToEdit(Student Stud, University Univ){
@@ -906,19 +927,12 @@ public class Menu {
 
     private static String[] AskNamePartOfTeacher(University Univ){
         String NameOfSTeacher[];
-        while(true){
-            NameOfSTeacher = AskNameOfTeacher();
-            if(NameOfSTeacher == null){
-                return null;
-            }
-            Teacher SearchTeacher[] = Univ.getAllTeachers(NameOfSTeacher);
-            if(SearchTeacher == null){
-                break;
-            }
-            else{
-                System.out.println("Викладач з таким ПІБ вже існує, повторіть");
-            }
+
+        NameOfSTeacher = AskNameOfTeacher();
+        if(NameOfSTeacher == null){
+            return null;
         }
+
         return NameOfSTeacher;
     }
 
@@ -927,7 +941,7 @@ public class Menu {
         return AskNameOfHuman();
     }
 
-    private static Teacher SearchTeacher(University Univ){
+    private static Teacher[] SearchTeacher(University Univ){
 
         Teacher SearchTeacher[];
         while(true){
@@ -943,7 +957,7 @@ public class Menu {
                 System.out.println("Такого викладача не існує, повторіть");
             }
         }
-        return SearchTeacher[0];
+        return SearchTeacher;
     }
 
     private static void AskWhatParamInTeacherToEdit(Teacher Teach, University Univ){
@@ -984,29 +998,6 @@ public class Menu {
             System.out.println();
         }
     }
-
-    /*
-    private static void PrintCurrentInformation(Object ForPrint[]){
-        if(ForPrint != null){
-            System.out.println("Поточна інформація:");
-            System.out.println();
-            int Length = ForPrint.length;
-            for(int i = 0; i < Length; i++){
-                System.out.println(ForPrint[i]);
-            }
-            System.out.println();
-        }
-    }
-
-    private static void PrintCurrentInformation(Object ForPrint){
-        if(ForPrint != null){
-            System.out.println("Поточна інформація:");
-            System.out.println();
-            System.out.println(ForPrint);
-            System.out.println();
-        }
-    }
-     */
 
     private static void PrintCurrentInformation(Faculty ForPrint){
         if(ForPrint != null){
@@ -1051,6 +1042,30 @@ public class Menu {
             PrintCurrentInformationH(ForPrint);
             System.out.println();
         }
+    }
+
+    private static Object SpecifyObject(Object[] Mass){
+        int Input = -1;
+        if (Mass == null){
+            return null;
+        }
+
+        while (Input != 0) {
+
+            System.out.println("Уточніть запит");
+            System.out.println("0] Повернутись до попереднього меню");
+            for(int i = 0; i < Mass.length; i++){
+                System.out.println((i+1)+"] "+Mass[i]);
+            }
+
+            Input = DataInput.getInt(">");
+            if(Input != 0){
+                return Mass[Input-1];
+            }
+
+            System.out.println();
+        }
+        return null;
     }
 
 }
