@@ -1,6 +1,7 @@
 package UniversityUtilits;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Human {
@@ -10,6 +11,16 @@ public class Human {
     private Cathedra cathedra;
 
     public Human(boolean isTeacher, String[] name, Cathedra cathedra) {
+        if(name != null) {
+            for(int i = 0; i < name.length;i++){
+                if(name[i] != null) {
+                    if(name[i].length() > 0) {
+                        name[i] = name[i].toLowerCase();
+                        name[i] = Character.toUpperCase(name[i].charAt(0)) + name[i].substring(1);
+                    }
+                }
+            }
+        }
         this.isTeacher = isTeacher;
         this.name = name;
         this.cathedra = cathedra;

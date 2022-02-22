@@ -6,6 +6,9 @@ public class Faculty {
     private String name;
 
     public Faculty(String name) {
+        if(name != null) {
+            name = name.toLowerCase();
+        }
         this.name = name;
     }
 
@@ -31,6 +34,6 @@ public class Faculty {
 
     @Override
     public String toString() {
-        return "факультет: " + name;
+        return this.name;
     }
 }

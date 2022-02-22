@@ -8,6 +8,6 @@ public class Teacher extends Human {
 
     @Override
     public String toString() {
-        return "вчитель: " + super.toString();
+        return "викладач: " + super.toString();
     }
 }
