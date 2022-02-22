@@ -313,7 +313,7 @@ public class University {
     }
     public Student[] getAllStudentsFromCathedraFromCourse(Cathedra cathedra, int course) {
         Student[] res = null;
-        Human[] humans = (Student[]) getAllHumansFromCathedra(this.students, cathedra);
+        Human[] humans = getAllHumansFromCathedra(this.students, cathedra);
         if(humans == null)return null;
         Student[] students = new Student[humans.length];
         for(int i = 0; i < humans.length; i++) {
@@ -412,9 +412,7 @@ public class University {
         else minLength = chars1.length;
         for(int i = 0; i < minLength; i++){
             if(Character.toLowerCase(chars1[i]) == Character.toLowerCase(chars2[i])){
-                if(chars1.length > chars2.length && i == minLength -1)return 1;
-                else if(chars1.length < chars2.length && i == minLength -1)return -1;
-                else continue;
+                continue;
             }
             if(Character.toLowerCase(chars1[i]) == 'ґ') {
                 if (Character.toLowerCase(chars2[i]) != 1075) chars1[i] = 1075;
@@ -450,6 +448,8 @@ public class University {
             }
             return Character.toLowerCase(chars1[i]) - Character.toLowerCase(chars2[i]);
         }
+        if(chars1.length > chars2.length)return 1;
+        if(chars1.length < chars2.length)return -1;
         return 0;
     }
 }

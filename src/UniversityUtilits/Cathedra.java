@@ -1,5 +1,6 @@
 package UniversityUtilits;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class Cathedra {
@@ -8,6 +9,9 @@ public class Cathedra {
     private Faculty faculty;
 
     public Cathedra(String name, Faculty faculty) {
+        if(name != null) {
+            name = name.toLowerCase();
+        }
         this.name = name;
         this.faculty = faculty;
     }
@@ -43,7 +47,7 @@ public class Cathedra {
 
     @Override
     public String toString() {
-        return "кафедра: " + this.name;
+        return this.name;
     }
 }
 
