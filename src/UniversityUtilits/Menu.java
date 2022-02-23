@@ -1045,6 +1045,9 @@ public class Menu {
     }
 
     private static Object SpecifyObject(Object[] Mass){
+        if(Mass.length == 1){
+            return Mass[0];
+        }
         int Input = -1;
         if (Mass == null){
             return null;
