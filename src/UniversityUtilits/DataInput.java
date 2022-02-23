@@ -343,7 +343,7 @@ public final class DataInput {
         if(s == null)return false;
         if(s.length() <= 0)return false;
         for(char c : s.toCharArray()) {
-            if(!(Character.isLetter(c) || c == '.' || Character.isDigit(c)))return false;
+            if(!(Character.isLetter(c) || c == '.' || c == '\'' || Character.isDigit(c)))return false;
         }
         return true;
     }
