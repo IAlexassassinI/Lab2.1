@@ -245,7 +245,9 @@ public final class DataInput {
         String res = "";
         boolean isWord = false;
         do {
-            StringTokenizer tokens = new StringTokenizer(getString(), " ");
+            String str = getString();
+            if(str.length() <= 0)return str;
+            StringTokenizer tokens = new StringTokenizer(str, " ");
             if(tokens.countTokens() != 1) {
                 System.out.println(error);
                 continue;
@@ -261,7 +263,9 @@ public final class DataInput {
         String res = "";
         boolean isWord = false;
         do {
-            StringTokenizer tokens = new StringTokenizer(getString(announcement), " ");
+            String str = getString(announcement);
+            if(str.length() <= 0)return str;
+            StringTokenizer tokens = new StringTokenizer(str, " ");
             if(tokens.countTokens() != 1) {
                 System.out.println(error);
                 continue;
@@ -278,7 +282,9 @@ public final class DataInput {
         boolean isSentence = true;
         do {
             isSentence = true;
-            StringTokenizer tokens = new StringTokenizer(getString(), " ");
+            String str = getString();
+            if(str.length() <= 0)return str;
+            StringTokenizer tokens = new StringTokenizer(str, " ");
             if(tokens.countTokens() <= 0) {
                 System.out.println(error);
                 isSentence = false;
@@ -307,7 +313,9 @@ public final class DataInput {
         boolean isSentence = true;
         do {
             isSentence = true;
-            StringTokenizer tokens = new StringTokenizer(getString(announcement), " ");
+            String str = getString(announcement);
+            if(str.length() <= 0)return str;
+            StringTokenizer tokens = new StringTokenizer(str, " ");
             if(tokens.countTokens() <= 0) {
                 System.out.println(error);
                 isSentence = false;
@@ -335,7 +343,7 @@ public final class DataInput {
         if(s == null)return false;
         if(s.length() <= 0)return false;
         for(char c : s.toCharArray()) {
-            if(!Character.isLetter(c))return false;
+            if(!(Character.isLetter(c) || c == '.' || Character.isDigit(c)))return false;
         }
         return true;
     }
