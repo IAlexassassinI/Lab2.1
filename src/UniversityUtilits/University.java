@@ -174,6 +174,33 @@ public class University {
         return res;
     }
 
+    //TODO previous method replace by next
+
+    /*public Student[] getAllStudentsFromGroup(int group) {
+        Student[] res = null;
+        for(Student student : this.students) {
+            if(student.getGroup() == group) res = addStudentToArray(res, student);
+        }
+        return res;
+    }*/
+
+    //TODO previous method replace by next
+
+    public Student[] getAllStudentsByParams(String[] name, int course, int group) {
+        Student[] res = null;
+        for(Student student : this.students) {
+            boolean isNamesEqual = false;
+            boolean isCoursesEqual = false;
+            boolean isGroupsEqual = false;
+            if(name == null)isNamesEqual = true;
+            else if(student.getName()[0].equals(name[0]) && student.getName()[1].equals(name[1]) && student.getName()[2].equals(name[2]))isNamesEqual = true;
+            if(course == 0 || student.getCourse() == course)isCoursesEqual = true;
+            if(group == 0 || student.getGroup() == group)isGroupsEqual = true;
+            if(isNamesEqual && isCoursesEqual && isGroupsEqual)res = addStudentToArray(res, student);
+        }
+        return res;
+    }
+
     public Teacher[] getAllTeachers(String[] name) {
         if(name.length != 3)return null;
         Teacher[] res = null;
@@ -320,6 +347,14 @@ public class University {
             students[i] = (Student) humans[i];
         }
         for(Student student : students) {
+            if(student.getCourse() == course)res = addStudentToArray(res, student);
+        }
+        return res;
+    }
+
+    public Student[] getAllStudentsFromCourse(int course) {
+        Student[] res = null;
+        for(Student student : this.students) {
             if(student.getCourse() == course)res = addStudentToArray(res, student);
         }
         return res;

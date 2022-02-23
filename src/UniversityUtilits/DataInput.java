@@ -3,6 +3,8 @@ package UniversityUtilits;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public final class DataInput {
 
@@ -23,11 +25,11 @@ public final class DataInput {
         return value;
     }
 
-    public static Byte getByte(String announcment) {
+    public static Byte getByte(String announcement) {
         boolean isByte = false;
         Byte value = null;
         do {
-            String s = getString(announcment);
+            String s = getString(announcement);
             try {
                 value = Byte.valueOf(s);
                 isByte = true;
@@ -53,11 +55,11 @@ public final class DataInput {
         return value;
     }
 
-    public static Short getShort(String announcment) {
+    public static Short getShort(String announcement) {
         boolean isShort = false;
         Short value = null;
         do {
-            String s = getString();
+            String s = getString(announcement);
             try {
                 value = Short.valueOf(s);
                 isShort = true;
@@ -83,11 +85,11 @@ public final class DataInput {
         return value;
     }
 
-    public static Integer getInt(String announcment){
+    public static Integer getInt(String announcement){
         boolean isInt = false;
         Integer value = null;
         do {
-            String s = getString(announcment);
+            String s = getString(announcement);
             try {
                 value = Integer.valueOf(s);
                 isInt = true;
@@ -113,11 +115,11 @@ public final class DataInput {
         return value;
     }
 
-    public static Long getLong(String announcment) {
+    public static Long getLong(String announcement) {
         boolean isLong = false;
         Long value = null;
         do {
-            String s = getString(announcment);
+            String s = getString(announcement);
             try {
                 value = Long.valueOf(s);
                 isLong = true;
@@ -143,11 +145,11 @@ public final class DataInput {
         return value;
     }
 
-    public static Float getFloat(String announcment) {
+    public static Float getFloat(String announcement) {
         boolean isFloat = false;
         Float value = null;
         do {
-            String s = getString(announcment);
+            String s = getString(announcement);
             try {
                 value = Float.valueOf(s);
                 isFloat = true;
@@ -173,11 +175,11 @@ public final class DataInput {
         return value;
     }
 
-    public static Double getDouble(String announcment){
+    public static Double getDouble(String announcement){
         boolean isDouble = false;
         Double value = null;
         do {
-            String s = getString(announcment);
+            String s = getString(announcement);
             try {
                 value = Double.valueOf(s);
                 isDouble = true;
@@ -197,10 +199,10 @@ public final class DataInput {
         return s.charAt(0);
     }
 
-    public static char getChar(String announcment) {
+    public static char getChar(String announcement) {
         String s;
         do {
-            s = getString(announcment);
+            s = getString(announcement);
             if(s.length() != 1) System.out.println(error);
         } while(s.length() != 1);
         return s.charAt(0);
@@ -222,14 +224,14 @@ public final class DataInput {
         return res;
     }
 
-    public static String getString(String announcment){
+    public static String getString(String announcement){
         String res = "";
         boolean isString = false;
         do {
             try {
                 InputStreamReader isr = new InputStreamReader(System.in);
                 BufferedReader br = new BufferedReader(isr);
-                System.out.print(announcment);
+                System.out.print(announcement);
                 res = br.readLine();
                 isString = true;
             } catch (IOException e) {
@@ -237,6 +239,105 @@ public final class DataInput {
             }
         } while(!isString);
         return res;
+    }
+
+    public static String getWord() {
+        String res = "";
+        boolean isWord = false;
+        do {
+            StringTokenizer tokens = new StringTokenizer(getString(), " ");
+            if(tokens.countTokens() != 1) {
+                System.out.println(error);
+                continue;
+            }
+            res = tokens.nextToken();
+            if(!isWord(res)) System.out.println(error);
+            else isWord = true;
+        } while(!isWord);
+        return res;
+    }
+
+    public static String getWord(String announcement) {
+        String res = "";
+        boolean isWord = false;
+        do {
+            StringTokenizer tokens = new StringTokenizer(getString(announcement), " ");
+            if(tokens.countTokens() != 1) {
+                System.out.println(error);
+                continue;
+            }
+            res = tokens.nextToken();
+            if(!isWord(res)) System.out.println(error);
+            else isWord = true;
+        } while(!isWord);
+        return res;
+    }
+
+    public static String getSentence() {
+        StringBuilder res = new StringBuilder();
+        boolean isSentence = true;
+        do {
+            isSentence = true;
+            StringTokenizer tokens = new StringTokenizer(getString(), " ");
+            if(tokens.countTokens() <= 0) {
+                System.out.println(error);
+                isSentence = false;
+            }
+            else {
+                res.delete(0, res.length());
+                while(tokens.hasMoreTokens()) {
+                    String s = tokens.nextToken();
+                    if(isWord(s)){
+                        res.append(s);
+                        if(tokens.hasMoreTokens()) res.append(" ");
+                    }
+                    else {
+                        System.out.println(error);
+                        isSentence = false;
+                        break;
+                    }
+                }
+            }
+        } while(!isSentence);
+        return res.toString();
+    }
+
+    public static String getSentence(String announcement) {
+        StringBuilder res = new StringBuilder();
+        boolean isSentence = true;
+        do {
+            isSentence = true;
+            StringTokenizer tokens = new StringTokenizer(getString(announcement), " ");
+            if(tokens.countTokens() <= 0) {
+                System.out.println(error);
+                isSentence = false;
+            }
+            else {
+                res.delete(0, res.length());
+                while(tokens.hasMoreTokens()) {
+                    String s = tokens.nextToken();
+                    if(isWord(s)){
+                        res.append(s);
+                        if(tokens.hasMoreTokens()) res.append(" ");
+                    }
+                    else {
+                        System.out.println(error);
+                        isSentence = false;
+                        break;
+                    }
+                }
+            }
+        } while(!isSentence);
+        return res.toString();
+    }
+
+    private static boolean isWord(String s) {
+        if(s == null)return false;
+        if(s.length() <= 0)return false;
+        for(char c : s.toCharArray()) {
+            if(!Character.isLetter(c))return false;
+        }
+        return true;
     }
 
     public static Boolean getBoolean(String trueValue, String falseValue){
@@ -256,10 +357,10 @@ public final class DataInput {
         return value;
     }
 
-    public static Boolean getBoolean(String announcment, String trueValue, String falseValue){
+    public static Boolean getBoolean(String announcement, String trueValue, String falseValue){
         Boolean value = null;
         do {
-            String s = getString(announcment);
+            String s = getString(announcement);
             if(s.equals(trueValue)){
                 value = true;
             }
