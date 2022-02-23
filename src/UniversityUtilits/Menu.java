@@ -328,7 +328,7 @@ public class Menu {
 
             switch (Input) {
                 case 1:
-                    //ForAnswer = findByParam(TMPName, TMPCourse, TMPGroup);
+                    ForAnswer = Univ.getAllStudentsByParams(TMPName, TMPCourse, TMPGroup);
                     PrintAllHumanFromList(ForAnswer);
                     break;
                 case 2:
@@ -507,7 +507,7 @@ public class Menu {
 
     private static String AskNameOfFaculty(){
         System.out.println("Введіть назву факультету, 0 або пуста стрічка для відміни");
-        String Name = DataInput.getString(">");
+        String Name = DataInput.getSentence(">");
         if(Name.length() <= 0){
             return null;
         }
@@ -620,7 +620,7 @@ public class Menu {
 
     private static String AskNameOfCathedra(){
         System.out.println("Введіть назву кафедри, 0 або пуста стрічка для відміни");
-        String Name = DataInput.getString(">");
+        String Name = DataInput.getSentence(">");
         if(Name.length() <= 0){
             return null;
         }
@@ -779,7 +779,7 @@ public class Menu {
 
     private static String[] AskNameOfHuman(){
         String Name[] = new String[3];
-        Name[0] = DataInput.getString("Прізвище:");
+        Name[0] = DataInput.getWord("Прізвище:");
         if(Name[0].length() <= 0){
             return null;
         }
@@ -791,7 +791,7 @@ public class Menu {
         } catch (NumberFormatException e) {
 
         }
-        Name[1] = DataInput.getString("Ім'я:");
+        Name[1] = DataInput.getWord("Ім'я:");
         if(Name[1].length() <= 0){
             return null;
         }
@@ -803,7 +803,7 @@ public class Menu {
         } catch (NumberFormatException e) {
 
         }
-        Name[2] = DataInput.getString("Побатькові:");
+        Name[2] = DataInput.getWord("Побатькові:");
         if(Name[2].length() <= 0){
             return null;
         }
