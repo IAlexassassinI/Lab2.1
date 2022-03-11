@@ -464,6 +464,8 @@ public class University {
      */
 
     public static int compare(String s1, String s2) {
+        s1 = s1.replaceAll("\'", "");
+        s2 = s2.replaceAll("\'", "");
         char[] chars1 = s1.toCharArray();
         char[] chars2 = s2.toCharArray();
         int minLength;
