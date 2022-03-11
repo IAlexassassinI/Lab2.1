@@ -184,6 +184,30 @@ public class University {
         return res;
     }*/
 
+    public void sortStudents() {
+        for(int i = 0; i < students.length; i++) {
+            for(int j = 0; j < students.length -1-i; j++){
+                if(compare(this.students[j].getName()[0], this.students[j+1].getName()[0]) > 0) {
+                    swap(this.students, j, j+1);
+                    continue;
+                }
+                if(compare(this.students[j].getName()[0], this.students[j+1].getName()[0]) == 0 && compare(this.students[j].getName()[1], this.students[j+1].getName()[1]) > 0) {
+                    swap(this.students, j, j+1);
+                    continue;
+                }
+                if(compare(this.students[j].getName()[0], this.students[j+1].getName()[0]) == 0 && compare(this.students[j].getName()[1], this.students[j+1].getName()[1]) == 0 && compare(this.students[j].getName()[2], this.students[j+1].getName()[2]) > 0) {
+                    swap(this.students, j, j+1);
+                }
+            }
+        }
+    }
+
+    private void swap(Object[] array, int id1, int id2) {
+        Object temp = array[id1];
+        array[id1] = array[id2];
+        array[id2] = temp;
+    }
+
     //TODO previous method replace by next
 
     public Student[] getAllStudentsByParams(String[] name, int course, int group) {
