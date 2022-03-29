@@ -3,7 +3,10 @@ package UniversityUtilits;
 
 public class Menu {
 
-    //TODO add go to main menu
+    /**
+     * method for main menu
+     * @param Univ
+     */
     public static void MainMenu(University Univ) {
         int Input = -1;
         while (Input != 0) {
@@ -36,6 +39,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for Global edit menu
+     * @param Univ
+     */
     private static void GlobalEditMenu(University Univ){
         int Input = -1;
         while (Input != 0) {
@@ -69,7 +76,10 @@ public class Menu {
         }
     }
 
-    //TODO VVV Actions of edit VVV
+    /**
+     * Method for choosing what to do with faculty
+     * @param Univ
+     */
     private static void ChooseActionMenuForFaculty(University Univ){
         int Input = -1;
         Faculty TMPFacult;
@@ -113,6 +123,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for choosing what to do with cathedra
+     * @param Univ
+     */
     private static void ChooseActionMenuForCathedra(University Univ){
         int Input = -1;
         Cathedra TMPCathedra;
@@ -154,6 +168,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for choosing what to do with student
+     * @param Univ
+     */
     private static void ChooseActionMenuForStudent(University Univ){
         int Input = -1;
         Student TMPStudent;
@@ -198,6 +216,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for choosing what to do with teacher
+     * @param Univ
+     */
     private static void ChooseActionMenuForTeacher(University Univ){
         int Input = -1;
         Teacher TMPTeacher;
@@ -241,9 +263,11 @@ public class Menu {
             System.out.println();
         }
     }
-    //TODO ^^^ Actions of edit ^^^
-    //TODO VVV Finder VVV
 
+    /**
+     * Method for choosing to find who
+     * @param Univ
+     */
     private static void FindWhoMenu(University Univ){
         int Input = -1;
         while (Input != 0) {
@@ -268,6 +292,10 @@ public class Menu {
         }
     }
 
+    /**
+     * prints all human type objects from massive
+     * @param List
+     */
     private static void PrintAllHumanFromList(Human List[]){
         if(List == null){
             System.out.println("Не вдалося нікого знайти");
@@ -281,7 +309,10 @@ public class Menu {
         System.out.println();
     }
 
-    //TODO CHANGING WIP
+    /**
+     * Method for finding student by some params
+     * @param Univ
+     */
     private static void FindByWhatStudent(University Univ){
         int Input = -1;
         String TMPName[] = null;
@@ -348,6 +379,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for finding teacher by some params
+     * @param Univ
+     */
     private static void FindByWhatTeacher(University Univ) {
         int Input = -1;
         String TMPName[];
@@ -376,9 +411,10 @@ public class Menu {
 
 
 
-    //TODO ^^^ Finder ^^^
-    //TODO VVV Information VVV
-
+    /**
+     * Method for finding some information about students
+     * @param Univ
+     */
     private static void StudentInfoMenu(University Univ){
         int Input = -1;
         Student ForAnswer[];
@@ -439,6 +475,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for finding some information about teachers
+     * @param Univ
+     */
     private static void TeacherInfoMenu(University Univ){
         int Input = -1;
         Faculty TMPFacult;
@@ -474,9 +514,10 @@ public class Menu {
         }
     }
 
-    //TODO ^^^ Information ^^^
-
-    //TODO VVV VVV VVV
+    /**
+     * Method for AddFullFaculty
+     * @param Univ
+     */
     private static Faculty AddFullFaculty(University Univ){
         Faculty Res;
         String NameOfFaculty = AskNamePartOfFaculty(Univ);
@@ -487,6 +528,10 @@ public class Menu {
         return Res;
     }
 
+    /**
+     * Method for AskNamePartOfFaculty
+     * @param Univ
+     */
     private static String AskNamePartOfFaculty(University Univ){
         String NameOfFaculty;
         while(true){
@@ -505,6 +550,10 @@ public class Menu {
         return NameOfFaculty;
     }
 
+    /**
+     * Method for AskNameOfFaculty
+     * @return
+     */
     private static String AskNameOfFaculty(){
         System.out.println("Введіть назву факультету, 0 або пуста стрічка для відміни");
         String Name = DataInput.getSentence(">");
@@ -523,6 +572,10 @@ public class Menu {
         return Name;
     }
 
+    /**
+     * Method for SearchFaculty
+     * @param Univ
+     */
     private static Faculty SearchFaculty(University Univ){
         System.out.println("Доступні факультети:");
 
@@ -551,6 +604,11 @@ public class Menu {
         return SearchFacult;
     }
 
+    /**
+     * Method for AskWhatParamInFacultyToEdit
+     * @param Facult
+     * @param Univ
+     */
     private static void AskWhatParamInFacultyToEdit(Faculty Facult, University Univ){
         int Input = -1;
         Faculty ForChange;
@@ -579,9 +637,11 @@ public class Menu {
             System.out.println();
         }
     }
-    //TODO ^^^ ^^^ ^^^
-    //TODO VVV VVV VVV
 
+    /**
+     * Method for AddFullCathedra
+     * @param Univ
+     */
     private static Cathedra AddFullCathedra(University Univ){
         Cathedra Res;
 
@@ -600,6 +660,10 @@ public class Menu {
         return Res;
     }
 
+    /**
+     * Method for AskNamePartOfCathedra
+     * @param Univ
+     */
     private static String AskNamePartOfCathedra(University Univ){
         String NameOfCathedra;
         while(true){
@@ -618,6 +682,10 @@ public class Menu {
         return NameOfCathedra;
     }
 
+    /**
+     * Method for AskNameOfCathedra
+     * @return
+     */
     private static String AskNameOfCathedra(){
         System.out.println("Введіть назву кафедри, 0 або пуста стрічка для відміни");
         String Name = DataInput.getSentence(">");
@@ -635,6 +703,10 @@ public class Menu {
         return Name;
     }
 
+    /**
+     * Method for SearchCathedra
+     * @param Univ
+     */
     private static Cathedra SearchCathedra(University Univ){
         System.out.println("Доступні кафедри:");
         for (int i = 0; i < Univ.getCathedras().length; i++){
@@ -662,6 +734,11 @@ public class Menu {
         return SearchCathedra;
     }
 
+    /**
+     * Method for AskWhatParamInCathedraToEdit
+     * @param Cathed
+     * @param Univ
+     */
     private static void AskWhatParamInCathedraToEdit(Cathedra Cathed, University Univ){
         int Input = -1;
         Cathedra ForChange;
@@ -701,9 +778,11 @@ public class Menu {
         }
     }
 
-    //TODO ^^^ ^^^ ^^^
-    //TODO VVV VVV VVV
-
+    /**
+     * Method for AddFullStudent
+     * @param Univ
+     * @return
+     */
     private static Student AddFullStudent(University Univ){
         Student Res;
 
@@ -732,6 +811,10 @@ public class Menu {
         return Res;
     }
 
+    /**
+     * Method for AskCourseOfStudent
+     * @return
+     */
     private static int AskCourseOfStudent(){
         System.out.println("Введіть курс, 0 для відміни");
         int Res;
@@ -749,6 +832,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for AskGroupOfStudent
+     * @return
+     */
     private static int AskGroupOfStudent(){
         System.out.println("Введіть групу, 0 для відміни");
         int Res;
@@ -766,6 +853,11 @@ public class Menu {
         }
     }
 
+    /**
+     * Method for AskNamePartOfStudent
+     * @param Univ
+     * @return
+     */
     private static String[] AskNamePartOfStudent(University Univ){
         String NameOfStudent[];
 
@@ -777,6 +869,10 @@ public class Menu {
         return NameOfStudent;
     }
 
+    /**
+     * Method for AskNameOfHuman
+     * @return
+     */
     private static String[] AskNameOfHuman(){
         String Name[] = new String[3];
         Name[0] = DataInput.getWord("Прізвище:");
@@ -818,15 +914,21 @@ public class Menu {
         return Name;
     }
 
+    /**
+     * Method for AskNameOfStudent
+     * @return
+     */
     private static String[] AskNameOfStudent(){
         System.out.println("Введіть ПІБ студента, 0 або пуста стрічка для відміни");
         return AskNameOfHuman();
     }
 
+    /**
+     * Method for SearchStudent
+     * @param Univ
+     * @return
+     */
     private static Student[] SearchStudent(University Univ){
-        //TODO
-        //TODO Clones allowed
-        //TODO
 
         Student SearchStudent[];
         while(true){
@@ -845,6 +947,11 @@ public class Menu {
         return SearchStudent;
     }
 
+    /**
+     * Method for AskWhatParamInStudentToEdit
+     * @param Stud
+     * @param Univ
+     */
     private static void AskWhatParamInStudentToEdit(Student Stud, University Univ){
         int Input = -1;
         Student ForChange;
@@ -904,9 +1011,11 @@ public class Menu {
         }
     }
 
-    //TODO ^^^ ^^^ ^^^
-    //TODO VVV VVV VVV
-
+    /**
+     * AddFullTeacher
+     * @param Univ
+     * @return
+     */
     private static Teacher AddFullTeacher(University Univ){
         Teacher Res;
 
@@ -925,6 +1034,11 @@ public class Menu {
         return Res;
     }
 
+    /**
+     * AskNamePartOfTeacher
+     * @param Univ
+     * @return
+     */
     private static String[] AskNamePartOfTeacher(University Univ){
         String NameOfSTeacher[];
 
@@ -936,11 +1050,20 @@ public class Menu {
         return NameOfSTeacher;
     }
 
+    /**
+     * AskNameOfTeacher
+     * @return
+     */
     private static String[] AskNameOfTeacher(){
         System.out.println("Введіть ПІБ викладача, 0 або пуста стрічка для відміни");
         return AskNameOfHuman();
     }
 
+    /**
+     * SearchTeacher
+     * @param Univ
+     * @return
+     */
     private static Teacher[] SearchTeacher(University Univ){
 
         Teacher SearchTeacher[];
@@ -960,6 +1083,11 @@ public class Menu {
         return SearchTeacher;
     }
 
+    /**
+     * AskWhatParamInTeacherToEdit
+     * @param Teach
+     * @param Univ
+     */
     private static void AskWhatParamInTeacherToEdit(Teacher Teach, University Univ){
         int Input = -1;
         Teacher ForChange;
@@ -999,6 +1127,10 @@ public class Menu {
         }
     }
 
+    /**
+     * PrintCurrentInformation
+     * @param ForPrint
+     */
     private static void PrintCurrentInformation(Faculty ForPrint){
         if(ForPrint != null){
             System.out.println("Поточна інформація:");
@@ -1008,6 +1140,10 @@ public class Menu {
         }
     }
 
+    /**
+     * PrintCurrentInformation
+     * @param ForPrint
+     */
     private static void PrintCurrentInformation(Cathedra ForPrint){
         if(ForPrint != null){
             System.out.println("Поточна інформація:");
@@ -1018,6 +1154,10 @@ public class Menu {
         }
     }
 
+    /**
+     * PrintCurrentInformationH
+     * @param ForPrint
+     */
     private static void PrintCurrentInformationH(Human ForPrint){
         if(ForPrint != null){
             System.out.println("Поточна інформація:");
@@ -1028,6 +1168,10 @@ public class Menu {
         }
     }
 
+    /**
+     * PrintCurrentInformation
+     * @param ForPrint
+     */
     private static void PrintCurrentInformation(Student ForPrint){
         if(ForPrint != null){
             PrintCurrentInformationH(ForPrint);
@@ -1037,6 +1181,10 @@ public class Menu {
         }
     }
 
+    /**
+     * PrintCurrentInformation
+     * @param ForPrint
+     */
     private static void PrintCurrentInformation(Teacher ForPrint){
         if(ForPrint != null){
             PrintCurrentInformationH(ForPrint);
@@ -1044,6 +1192,11 @@ public class Menu {
         }
     }
 
+    /**
+     * SpecifyObject
+     * @param Mass
+     * @return
+     */
     private static Object SpecifyObject(Object[] Mass){
         if(Mass.length == 1){
             return Mass[0];
