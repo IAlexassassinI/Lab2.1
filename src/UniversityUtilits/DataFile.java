@@ -4,26 +4,43 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+/**
+ * For save and load from file
+ */
 public class DataFile {
+
     private University Univ;
     private String FPath;
 
+    /**
+     * Create object for save and load
+     * @param FilePath
+     * @param Univers
+     */
     public DataFile(String FilePath, University Univers) {
         this.Univ = Univers;
         this.FPath = FilePath;
     }
 
+    /**
+     * Create object for save and load
+     * @param FilePath
+     */
     public DataFile(String FilePath) {
         this.Univ = null;
         this.FPath = FilePath;
     }
 
-    /*
-    name of university
-    facults
-    cathedras
-    students
-    teachers
+    /**
+     * SaveAll
+     *
+     name of university
+     facults
+     cathedras
+     students
+     teachers
+     *
+     * @throws Exception
      */
     public void SaveAll() throws  Exception{
         if(Univ == null){
@@ -41,11 +58,16 @@ public class DataFile {
         FW.close();
     }
 
-    /*
-    length of elems
-    {
-    name
-    }
+    /**
+     * SaveFaculties
+     *
+     length of elems
+     {
+     name
+     }
+     *
+     * @param FW
+     * @throws Exception
      */
     private void SaveFaculties(FileWriter FW) throws Exception{
         int Length = Univ.getFaculties().length;
@@ -55,12 +77,17 @@ public class DataFile {
         }
     }
 
-    /*
-    length of elems
-    {
-    name
-    number of facult
-    }
+    /**
+     * SaveCathedras
+     *
+     length of elems
+     {
+     name
+     number of facult
+     }
+     *
+     * @param FW
+     * @throws Exception
      */
     private void SaveCathedras(FileWriter FW) throws Exception{
         int Length = Univ.getCathedras().length;
@@ -78,18 +105,21 @@ public class DataFile {
         }
     }
 
-    /*
-    without line isTeacher because its obviously
-
-    length of elems
-    {
-    name
-    name
-    name
-    number of cathedra
-    course
-    group
-    }
+    /**
+     * SaveStudents
+     *
+     length of elems
+     {
+     name
+     name
+     name
+     number of cathedra
+     course
+     group
+     }
+     *
+     * @param FW
+     * @throws Exception
      */
     private void SaveStudents(FileWriter FW) throws Exception{
         int Length = Univ.getStudents().length;
@@ -115,17 +145,19 @@ public class DataFile {
         }
     }
 
-    /*
-    without line isTeacher because its obviously
-
-    length of elems
-    {
-    name
-    name
-    name
-
-    number of cathedra
-    }
+    /**
+     * SaveTeachers
+     *
+     length of elems
+     {
+     name
+     name
+     name
+     number of cathedra
+     }
+     *
+     * @param FW
+     * @throws Exception
      */
     private void SaveTeachers(FileWriter FW) throws Exception{
         int Length = Univ.getTeachers().length;
@@ -148,6 +180,11 @@ public class DataFile {
         }
     }
 
+    /**
+     * LoadAll
+     * @return
+     * @throws Exception
+     */
     public University LoadAll() throws Exception{
         FileReader FR = new FileReader(FPath);
         BufferedReader BR = new BufferedReader(FR);
@@ -166,6 +203,12 @@ public class DataFile {
         return Res;
     }
 
+    /**
+     * LoadFaculties
+     * @param BR
+     * @param Un
+     * @throws Exception
+     */
     private void LoadFaculties(BufferedReader BR, University Un) throws Exception{
         int Length = Integer.parseInt(BR.readLine());
         Faculty ResFacultys[] = new Faculty[Length];
@@ -176,6 +219,12 @@ public class DataFile {
         Un.setFaculties(ResFacultys);
     }
 
+    /**
+     * LoadCathedras
+     * @param BR
+     * @param Un
+     * @throws Exception
+     */
     private void LoadCathedras(BufferedReader BR, University Un) throws Exception{
         int Length = Integer.parseInt(BR.readLine());
         Cathedra ResCathedras[] = new Cathedra[Length];
@@ -187,6 +236,12 @@ public class DataFile {
         Un.setCathedras(ResCathedras);
     }
 
+    /**
+     * LoadStudents
+     * @param BR
+     * @param Un
+     * @throws Exception
+     */
     private void LoadStudents(BufferedReader BR, University Un) throws Exception{
         int Length = Integer.parseInt(BR.readLine());
         Student Students[] = new Student[Length];
@@ -204,6 +259,12 @@ public class DataFile {
         Un.setStudents(Students);
     }
 
+    /**
+     * LoadTeachers
+     * @param BR
+     * @param Un
+     * @throws Exception
+     */
     private void LoadTeachers(BufferedReader BR, University Un) throws Exception{
         int Length = Integer.parseInt(BR.readLine());
         Teacher Teachers[] = new Teacher[Length];
