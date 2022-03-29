@@ -3,16 +3,20 @@ package UniversityUtilits;
 public class University {
 
     private String name;
-    //private final String file;
     private Faculty[] faculties;
     private Cathedra[] cathedras;
     private Student[] students;
     private Teacher[] teachers;
     private DataFile dataFile;
 
+    /**
+     *  constructor
+     * @param name name of the university
+     * @param file name of saving file
+     */
+
     public University(String name, String file) {
         this.name = name;
-        //this.file = file;
         this.faculties = new Faculty[0];
         this.cathedras = new Cathedra[0];
         this.students = new Student[0];
@@ -20,45 +24,106 @@ public class University {
         this.dataFile = new DataFile(file, this);
     }
 
+    /**
+     * sets new name of the university
+     *
+     * @param name name of the university
+     */
+
     void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * sets new faculties
+     *
+     * @param faculties array of faculties
+     */
 
     void setFaculties(Faculty[] faculties) {
         this.faculties = faculties;
     }
 
+    /**
+     * sets new cathedras
+     *
+     * @param cathedras array of cathedras
+     */
+
     void setCathedras(Cathedra[] cathedras) {
         this.cathedras = cathedras;
     }
+
+    /**
+     * sets new students
+     *
+     * @param students array of students
+     */
 
     void setStudents(Student[] students) {
         this.students = students;
     }
 
+    /**
+     * sets new teachers
+     *
+     * @param teachers array of teachers
+     */
+
     void setTeachers(Teacher[] teachers) {
         this.teachers = teachers;
     }
+
+    /**
+     *
+     * @return name of the university
+     */
 
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return array of faculties
+     */
+
     public Faculty[] getFaculties() {
         return faculties;
     }
+
+    /**
+     *
+     * @return array of cathedras
+     */
 
     public Cathedra[] getCathedras() {
         return cathedras;
     }
 
+    /**
+     *
+     * @return array of students
+     */
+
     public Student[] getStudents() {
         return students;
     }
 
+    /**
+     *
+     * @return array of teachers
+     */
+
     public Teacher[] getTeachers() {
         return teachers;
     }
+
+    /**
+     * adds new faculty
+     *
+     * @param faculty new faculty
+     */
 
     public void addFaculty(Faculty faculty) {
         Faculty[] temp = new Faculty[this.faculties.length+1];
@@ -69,6 +134,12 @@ public class University {
         this.faculties = temp;
     }
 
+    /**
+     * adds new cathedra
+     *
+     * @param cathedra new cathedra
+     */
+
     public void addCathedra(Cathedra cathedra) {
         Cathedra[] temp = new Cathedra[this.cathedras.length+1];
         for(int i = 0; i < this.cathedras.length; i++) {
@@ -77,6 +148,12 @@ public class University {
         temp[this.cathedras.length] = cathedra;
         this.cathedras = temp;
     }
+
+    /**
+     * adds new student by alphabet
+     *
+     * @param student new student
+     */
 
     public void addStudent(Student student) {
         Student[] temp = new Student[this.students.length+1];
@@ -103,12 +180,24 @@ public class University {
         this.students = temp;
     }
 
+    /**
+     *
+     * @param name name of the faculty
+     * @return faculty from array by name
+     */
+
     public Faculty getFaculty(String name) {
         for(int i = 0; i < this.faculties.length; i++) {
             if(this.faculties[i].getName().equals(name))return this.faculties[i];
         }
         return null;
     }
+
+    /**
+     *
+     * @param name name of the cathedra
+     * @return cathedra from array by name
+     */
 
     public Cathedra getCathedra(String name) {
         for(int i = 0; i < this.cathedras.length; i++) {
@@ -117,12 +206,24 @@ public class University {
         return null;
     }
 
+    /**
+     *
+     * @param faculty faculty
+     * @return cathedra from array by faculty
+     */
+
     public Cathedra getCathedra(Faculty faculty) {
         for(int i = 0; i < this.cathedras.length; i++) {
             if(this.cathedras[i].getFaculty().equals(faculty))return this.cathedras[i];
         }
         return null;
     }
+
+    /**
+     * adds new teacher to array by alphabet
+     *
+     * @param teacher new teacher
+     */
 
     public void addTeacher(Teacher teacher) {
         Teacher[] temp = new Teacher[this.teachers.length+1];
@@ -149,6 +250,12 @@ public class University {
         this.teachers = temp;
     }
 
+    /**
+     *
+     * @param name name of the students
+     * @return array of students by name
+     */
+
     public Student[] getAllStudents(String[] name) {
         if(name.length != 3)return null;
         Student[] res = null;
@@ -158,6 +265,12 @@ public class University {
         return res;
     }
 
+    /**
+     *
+     * @param course course of the students
+     * @return array of students by course
+     */
+
     public Student[] getAllStudents(int course) {
         Student[] res = null;
         for(Student student : this.students) {
@@ -165,6 +278,13 @@ public class University {
         }
         return res;
     }
+
+    /**
+     *
+     * @param cathedra cathedra of the students
+     * @param group group of the students
+     * @return array of students by cathedra and group
+     */
 
     public Student[] getAllStudents(Cathedra cathedra, int group) {
         Student[] res = null;
@@ -174,15 +294,9 @@ public class University {
         return res;
     }
 
-    //TODO previous method replace by next
-
-    /*public Student[] getAllStudentsFromGroup(int group) {
-        Student[] res = null;
-        for(Student student : this.students) {
-            if(student.getGroup() == group) res = addStudentToArray(res, student);
-        }
-        return res;
-    }*/
+    /**
+     * sorts students by alphabet
+     */
 
     public void sortStudents() {
         for(int i = 0; i < students.length; i++) {
@@ -202,13 +316,49 @@ public class University {
         }
     }
 
+    /**
+     * sorts teachers by alphabet
+     */
+
+    public void sortTeachers() {
+        for(int i = 0; i < teachers.length; i++) {
+            for(int j = 0; j < teachers.length -1-i; j++){
+                if(compare(this.teachers[j].getName()[0], this.teachers[j+1].getName()[0]) > 0) {
+                    swap(this.teachers, j, j+1);
+                    continue;
+                }
+                if(compare(this.teachers[j].getName()[0], this.teachers[j+1].getName()[0]) == 0 && compare(this.teachers[j].getName()[1], this.teachers[j+1].getName()[1]) > 0) {
+                    swap(this.teachers, j, j+1);
+                    continue;
+                }
+                if(compare(this.teachers[j].getName()[0], this.teachers[j+1].getName()[0]) == 0 && compare(this.teachers[j].getName()[1], this.teachers[j+1].getName()[1]) == 0 && compare(this.teachers[j].getName()[2], this.teachers[j+1].getName()[2]) > 0) {
+                    swap(this.teachers, j, j+1);
+                }
+            }
+        }
+    }
+
+    /**
+     * swaps two objects in array
+     *
+     * @param array array of objects
+     * @param id1 index of first object in array
+     * @param id2 index of second object in array
+     */
+
     private void swap(Object[] array, int id1, int id2) {
         Object temp = array[id1];
         array[id1] = array[id2];
         array[id2] = temp;
     }
 
-    //TODO previous method replace by next
+    /**
+     *
+     * @param name name of students
+     * @param course course of students
+     * @param group group of students
+     * @return array of the students by params
+     */
 
     public Student[] getAllStudentsByParams(String[] name, int course, int group) {
         Student[] res = null;
@@ -225,6 +375,12 @@ public class University {
         return res;
     }
 
+    /**
+     *
+     * @param name name of the teachers
+     * @return array of teachers by name
+     */
+
     public Teacher[] getAllTeachers(String[] name) {
         if(name.length != 3)return null;
         Teacher[] res = null;
@@ -233,6 +389,12 @@ public class University {
         }
         return res;
     }
+
+    /**
+     * deletes exact faculty from array
+     *
+     * @param faculty exact faculty
+     */
 
     public void deleteFaculty(Faculty faculty) {
         Object[] objects = deleteAllElementsFromArray(this.faculties, faculty);
@@ -246,6 +408,12 @@ public class University {
         }
     }
 
+    /**
+     * deletes exact cathedra from array
+     *
+     * @param cathedra exact cathedra
+     */
+
     public void deleteCathedra(Cathedra cathedra) {
         Object[] objects = deleteAllElementsFromArray(this.cathedras, cathedra);
         if(objects == null) {
@@ -257,6 +425,12 @@ public class University {
             this.cathedras[i] = (Cathedra) objects[i];
         }
     }
+
+    /**
+     * deletes exact teacher from array
+     *
+     * @param teacher teacher
+     */
 
     public void deleteTeacher(Teacher teacher) {
         Object[] objects = deleteAllElementsFromArray(this.teachers, teacher);
@@ -270,6 +444,12 @@ public class University {
         }
     }
 
+    /**
+     * deletes exact student from array
+     *
+     * @param student student
+     */
+
     public void deleteStudent(Student student) {
         Object[] objects = deleteAllElementsFromArray(this.students, student);
         if(objects == null) {
@@ -282,11 +462,23 @@ public class University {
         }
     }
 
+    /**
+     * copies information from new faculty to faculty
+     * @param faculty faculty
+     * @param newFaculty new faculty
+     */
+
     public void editFaculty(Faculty faculty, Faculty newFaculty) {
         for(Faculty f : this.faculties) {
             if(f.equals(faculty))f.copy(newFaculty);
         }
     }
+
+    /**
+     * copies information from new cathedra to cathedra
+     * @param cathedra cathedra
+     * @param newCathedra new cathedra
+     */
 
     public void editCathedra(Cathedra cathedra, Cathedra newCathedra) {
         for(Cathedra c : this.cathedras) {
@@ -294,17 +486,34 @@ public class University {
         }
     }
 
+    /**
+     * copies information from new teacher to teacher
+     * @param teacher teacher
+     * @param newTeacher new teacher
+     */
+
     public void editTeacher(Teacher teacher, Teacher newTeacher) {
         for(Teacher t : this.teachers) {
             if(t.equals(teacher))t.copy(newTeacher);
         }
     }
 
+    /**
+     * copies information from new student to student
+     * @param student student
+     * @param newStudent new student
+     */
+
     public void editStudent(Student student, Student newStudent) {
         for(Student s : this.students) {
             if(s.equals(student))s.copy(newStudent);
         }
     }
+
+    /**
+     *
+     * @return array of students by courses
+     */
 
     public Student[] getAllStudentsByCourses() {
         Student[] res = new Student[this.students.length];
@@ -317,6 +526,12 @@ public class University {
         return res;
     }
 
+    /**
+     *
+     * @param faculty faculty
+     * @return array of students from specific faculty
+     */
+
     public Student[] getAllStudentsFromFaculty(Faculty faculty) {
         Student[] res = null;
         for (Student student : this.students) {
@@ -325,6 +540,12 @@ public class University {
         return res;
     }
 
+    /**
+     *
+     * @param faculty faculty
+     * @return array of teachers from specific faculty
+     */
+
     public Teacher[] getAllTeachersFromFaculty(Faculty faculty) {
         Teacher[] res = null;
         for (Teacher teacher : this.teachers) {
@@ -332,6 +553,12 @@ public class University {
         }
         return res;
     }
+
+    /**
+     *
+     * @param cathedra cathedra
+     * @return array of students from secific cathedra by courses
+     */
 
     public Student[] getAllStudentsFromCathedraByCourses(Cathedra cathedra) {
         Human[] humans = getAllHumansFromCathedra(getAllStudentsByCourses(), cathedra);
@@ -343,6 +570,12 @@ public class University {
         return students;
     }
 
+    /**
+     *
+     * @param cathedra cathedra
+     * @return array of students from specific cathedra
+     */
+
     public Student[] getAllStudentsFromCathedra(Cathedra cathedra) {
         Human[] humans = getAllHumansFromCathedra(this.students, cathedra);
         if(humans == null)return null;
@@ -353,6 +586,12 @@ public class University {
         return students;
     }
 
+    /**
+     *
+     * @param cathedra cathedra
+     * @return array of teachers from specific cathedra
+     */
+
     public Teacher[] getAllTeachersFromCathedra(Cathedra cathedra) {
         Human[] humans =  getAllHumansFromCathedra(this.teachers, cathedra);
         if(humans == null)return null;
@@ -362,6 +601,14 @@ public class University {
         }
         return teachers;
     }
+
+    /**
+     *
+     * @param cathedra cathedra
+     * @param course course
+     * @return array of students from specific cathedra and course
+     */
+
     public Student[] getAllStudentsFromCathedraFromCourse(Cathedra cathedra, int course) {
         Student[] res = null;
         Human[] humans = getAllHumansFromCathedra(this.students, cathedra);
@@ -376,6 +623,12 @@ public class University {
         return res;
     }
 
+    /**
+     *
+     * @param course course
+     * @return array of students from specific course
+     */
+
     public Student[] getAllStudentsFromCourse(int course) {
         Student[] res = null;
         for(Student student : this.students) {
@@ -383,6 +636,10 @@ public class University {
         }
         return res;
     }
+
+    /**
+     * saves all information in saving file
+     */
 
     public void saveAll() {
         boolean isError;
@@ -396,6 +653,13 @@ public class University {
         } while(isError);
     }
 
+    /**
+     *
+     * @param humans array of humans
+     * @param cathedra cathedra
+     * @return array of humans from specific cathedra
+     */
+
     private Human[] getAllHumansFromCathedra(Human[] humans, Cathedra cathedra) {
         Human[] res = null;
         for(Human human : humans) {
@@ -404,9 +668,13 @@ public class University {
         return res;
     }
 
-    /*public static void main(String[] args) {
-
-    }*/
+    /**
+     * deletes object from array
+     *
+     * @param objects array of objects
+     * @param object object
+     * @return new array of objects
+     */
 
     private Object[] deleteAllElementsFromArray(Object[] objects, Object object) {
         for(int i = 0; i < objects.length; i++) {
@@ -417,6 +685,14 @@ public class University {
         }
         return objects;
     }
+
+    /**
+     * deletes object from array
+     *
+     * @param objects array of objects
+     * @param id index of object in array
+     * @return new array of objects
+     */
 
     private Object[] deleteElementFromArray(Object[] objects, int id) {
         Object[] temp = new Object[objects.length-1];
@@ -429,6 +705,14 @@ public class University {
         return temp;
     }
 
+    /**
+     * adds new human to array by alphabet
+     *
+     * @param humans array of humans
+     * @param human new human
+     * @return new array of humans
+     */
+
     private Human[] addHumanToArray(Human[] humans, Human human) {
         if(humans == null)return new Human[]{human};
         Human[] res = new Human[humans.length+1];
@@ -438,6 +722,14 @@ public class University {
         res[humans.length] = human;
         return res;
     }
+
+    /**
+     * adds new student to array by alphabet
+     *
+     * @param students array of the students
+     * @param student new student
+     * @return new array of students
+     */
 
     private Student[] addStudentToArray(Student[] students, Student student) {
         if(students == null)return new Student[]{student};
@@ -449,6 +741,14 @@ public class University {
         return res;
     }
 
+    /**
+     * adds new teacher to array by alphabet
+     *
+     * @param teachers array of teachers
+     * @param teacher new teacher
+     * @return new array of teachers
+     */
+
     private Teacher[] addTeacherToArray(Teacher[] teachers, Teacher teacher) {
         if(teachers == null)return new Teacher[]{teacher};
         Teacher[] res = new Teacher[teachers.length+1];
@@ -459,11 +759,17 @@ public class University {
         return res;
     }
 
-    /*
-    compares two strings
+    /**
+     * compares two strings
+     *
+     * @param s1 first string
+     * @param s2 second strings
+     * @return result of comparing
      */
 
     public static int compare(String s1, String s2) {
+        s1 = s1.replaceAll("\'", "");
+        s2 = s2.replaceAll("\'", "");
         char[] chars1 = s1.toCharArray();
         char[] chars2 = s2.toCharArray();
         int minLength;

@@ -10,6 +10,14 @@ public class Human {
     private String[] name;
     private Cathedra cathedra;
 
+    /**
+     * constuctor
+     *
+     * @param isTeacher is human a teacher
+     * @param name name of the human
+     * @param cathedra specific cathedra
+     */
+
     public Human(boolean isTeacher, String[] name, Cathedra cathedra) {
         if(name != null) {
             for(int i = 0; i < name.length;i++){
@@ -26,39 +34,79 @@ public class Human {
         this.cathedra = cathedra;
     }
 
+    /**
+     * copies information from human to this
+     *
+     * @param human specific human
+     */
+
     public void copy(Human human) {
         this.isTeacher = human.isTeacher();
         this.name = human.getName();
         this.cathedra = human.getCathedra();
     }
 
+    /**
+     *
+     * @return is this human teacher
+     */
+
     public boolean isTeacher() {
         return isTeacher;
     }
 
-    public void setTeacher(boolean teacher) {
-        isTeacher = teacher;
-    }
+    /**
+     *
+     * @return name of this human
+     */
 
     public String[] getName() {
         return name;
     }
 
+    /**
+     * sets new name for this human
+     *
+     * @param name new name
+     */
+
     public void setName(String[] name) {
         this.name = name;
     }
+
+    /**
+     *
+     * @return cathedra of this human
+     */
 
     public Cathedra getCathedra() {
         return cathedra;
     }
 
+    /**
+     * sets new cathedra to this human
+     *
+     * @param cathedra new cathedra
+     */
+
     public void setCathedra(Cathedra cathedra) {
         this.cathedra = cathedra;
     }
 
+    /**
+     *
+     * @return faculty of this human
+     */
+
     public Faculty getFaculty() {
         return this.cathedra.getFaculty();
     }
+
+    /**
+     *
+     * @param o specific object
+     * @return are this and o the same or consist the same information
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -67,6 +115,11 @@ public class Human {
         Human human = (Human) o;
         return isTeacher == human.isTeacher && Arrays.equals(name, human.name) && Objects.equals(cathedra, human.cathedra);
     }
+
+    /**
+     *
+     * @return information about this human
+     */
 
     @Override
     public String toString() {
