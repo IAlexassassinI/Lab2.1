@@ -1,4 +1,10 @@
+
+
 package UniversityUtilits;
+
+/**
+ * class which operates by students, teachers, faculties and cathedras
+ */
 
 public class University {
 
@@ -397,6 +403,7 @@ public class University {
      */
 
     public void deleteFaculty(Faculty faculty) {
+        deleteCathedras(faculty);
         Object[] objects = deleteAllElementsFromArray(this.faculties, faculty);
         if(objects == null) {
             this.faculties = new Faculty[0];
@@ -408,6 +415,12 @@ public class University {
         }
     }
 
+    private void deleteCathedras(Faculty faculty) {
+        for(Cathedra cathedra : this.cathedras) {
+            if(cathedra.getFaculty().equals(faculty))deleteCathedra(cathedra);
+        }
+    }
+
     /**
      * deletes exact cathedra from array
      *
@@ -415,6 +428,8 @@ public class University {
      */
 
     public void deleteCathedra(Cathedra cathedra) {
+        deleteStudents(cathedra);
+        deleteTeachers(cathedra);
         Object[] objects = deleteAllElementsFromArray(this.cathedras, cathedra);
         if(objects == null) {
             this.cathedras = new Cathedra[0];
@@ -423,6 +438,18 @@ public class University {
         this.cathedras = new Cathedra[objects.length];
         for(int i = 0; i < objects.length; i++) {
             this.cathedras[i] = (Cathedra) objects[i];
+        }
+    }
+
+    private void deleteTeachers(Cathedra cathedra) {
+        for(Teacher teacher : this.teachers) {
+            if(teacher.getCathedra().equals(cathedra))deleteTeacher(teacher);
+        }
+    }
+
+    private void deleteStudents(Cathedra cathedra) {
+        for(Student student : this.students) {
+            if(student.getCathedra().equals(cathedra))deleteStudent(student);
         }
     }
 
@@ -775,7 +802,7 @@ public class University {
         int minLength;
         if(chars1.length > chars2.length)minLength = chars2.length;
         else minLength = chars1.length;
-        for(int i = 0; i < minLength; i++){
+        /*for(int i = 0; i < minLength; i++){
             if(Character.toLowerCase(chars1[i]) == Character.toLowerCase(chars2[i])){
                 continue;
             }
@@ -814,7 +841,7 @@ public class University {
             return Character.toLowerCase(chars1[i]) - Character.toLowerCase(chars2[i]);
         }
         if(chars1.length > chars2.length)return 1;
-        if(chars1.length < chars2.length)return -1;
+        if(chars1.length < chars2.length)return -1;*/
         return 0;
     }
 }

@@ -1,8 +1,13 @@
+
+
 package UniversityUtilits;
 
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Objects;
+
+/**
+ * class which consists information about a human and presents it
+ */
 
 public class Human {
 

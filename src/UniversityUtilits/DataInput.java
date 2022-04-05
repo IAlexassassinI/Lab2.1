@@ -1,3 +1,5 @@
+
+
 package UniversityUtilits;
 
 import java.io.BufferedReader;
@@ -5,6 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
+
+/**
+ * class which operates input stream from console
+ */
 
 public final class DataInput {
 
