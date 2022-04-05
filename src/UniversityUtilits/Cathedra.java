@@ -1,7 +1,12 @@
 package UniversityUtilits;
 
+
 import java.util.Locale;
 import java.util.Objects;
+
+/**
+ * class which consists information about cathedra and presents it
+ */
 
 public class Cathedra {
 

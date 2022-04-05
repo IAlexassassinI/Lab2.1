@@ -1,6 +1,12 @@
+
 package UniversityUtilits;
 
 import java.util.Objects;
+
+/**
+ * class which consists information about a faculty and presents it
+ */
+
 
 public class Faculty {
     private String name;

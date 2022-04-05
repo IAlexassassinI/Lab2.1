@@ -1,4 +1,10 @@
+
 package UniversityUtilits;
+
+/**
+ * class which consists information about student and presents it
+ */
+
 
 public class Student extends Human {
 
